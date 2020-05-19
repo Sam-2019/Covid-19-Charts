@@ -1,6 +1,6 @@
 import React from "react";
 import countries from "../data/Countries";
-import Pagination from "../trial/Pagination";
+import Pagination from './Pagination';
 
 export default class List extends React.Component {
   state = {

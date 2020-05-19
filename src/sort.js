@@ -1,6 +1,6 @@
 import React from "react";
 import countries from "./data/Countries";
-import Pagination from "./trial/Pagination";
+import Pagination from "./Bar/Pagination";
 
 export default class Sort extends React.Component {
   state = {
