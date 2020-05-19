@@ -1,0 +1,20 @@
+npm install apollo-client --save
+npm install apollo-cache-inmemory apollo-link-http --save
+npm install graphql graphql-tag --save
+npm install react-apollo --save
+
+
+a pair of shoe = 20
+one man = 5
+shades = 2
+one glove = 20
+one shoe = 10
+man = 5
+a pair of gloves = 40
+
+10+((5+2+20+40)*2)
+
+
+control +K & control + C
+
+uncomment is control K & control U

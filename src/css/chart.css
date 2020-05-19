@@ -1,0 +1,20 @@
+.chart {
+  height: 50vh;
+  width: auto;
+  transition: 0.3s;
+}
+
+.chartLine {
+  height: 5vh;
+  width: auto;
+  transition: 0.3s;
+}
+
+.chartBar {
+  height: 35vh;
+  width: auto;
+  transition: 0.3s;
+}
+
+.chart:hover {
+}
