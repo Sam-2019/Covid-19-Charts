@@ -8,12 +8,14 @@
   height: 5vh;
   width: auto;
   transition: 0.3s;
+  border-radius: 0  0  0.5rem  0.5rem;
 }
 
 .chartBar {
-  height: 35vh;
+  height: 40.4vh;
   width: auto;
   transition: 0.3s;
+
 }
 
 .chart:hover {

@@ -17,9 +17,9 @@ export default class  HistoryDeath extends React.Component {
       });
     }
 
-    var dataCase = [];
+    var dataDeath = [];
     for (let key in deaths) {
-      dataCase.push(deaths[key]);
+      dataDeath.push(deaths[key]);
     }
 
     var date = [];
@@ -29,8 +29,12 @@ export default class  HistoryDeath extends React.Component {
 
     var newData = [];
     var numbers2 = [];
+    var numbers3 = [];
+
     var preValue;
-    dataCase.map(myFunction);
+    var preValue2;
+
+    dataDeath.map(myFunction);
 
     function myFunction(value0) {
       if (preValue) {
@@ -39,13 +43,29 @@ export default class  HistoryDeath extends React.Component {
       preValue = value0;
     }
 
-    dataCase.shift();
+    dataDeath.shift();
 
-    for (let key in dataCase) {
+    var newdataDeath = [];
+    for (let key in numbers2) {
+      newdataDeath.push(numbers2[key]);
+    }
+
+    newdataDeath.map(percent2);
+
+    function percent2(value) {
+      if (preValue) {
+        numbers3.push(value - preValue2);
+      }
+      preValue2 = value;
+    }
+
+
+    for (let key in dataDeath) {
       newData.push({
         x: date[key],
         y: numbers2[key],
-        deaths: dataCase[key],
+        z: numbers3[key],
+        deaths: dataDeath[key],
       });
     }
 
@@ -53,8 +73,42 @@ export default class  HistoryDeath extends React.Component {
       data: newData,
     });
 
+    const rate = (newData[28].z * 100).toFixed(2);
+    let rateRewrite;
+    if (rate > 0) {
+      rateRewrite = rate;
+    } else rateRewrite = rate * -1;
+
     return (
       <>
+    <div>
+     
+          <span className="value">
+
+          {Intl.NumberFormat().format( this.props.todayDeath[0].todayDeaths)}
+
+          </span>
+          <div className="float-right output slideIn">
+            <span className="pChange">
+              {rate > 0 ? (
+                <span className="green">
+                  <span>
+                    <i className="fas fa-caret-up"></i>
+                  </span>{" "}
+                  {rateRewrite}%
+                </span>
+              ) : (
+                <span className="red">
+                  <span>
+                    <i className="fas fa-caret-down"></i>
+                  </span>{" "}
+                  {rateRewrite}%
+                </span>
+              )}
+            </span>
+          </div>
+        </div>
+
         <div className="chartLine">
           <ResponsiveLine
             data={final}

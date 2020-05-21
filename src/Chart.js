@@ -3,7 +3,6 @@ import Top from "./Text/Top";
 import Bar from "./Bar/Bar";
 import Line from "./Line/Line";
 import Pie from "./Pie/Pie";
-import Sort from "./sort";
 
 import "./css/chart.css";
 

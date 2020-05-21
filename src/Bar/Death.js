@@ -1,35 +1,35 @@
 import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
-import List from "./List";
+import Pagination from "./Pagination";
 
 class deathBar extends React.Component {
   render() {
-    const  historyDates  = this.props.data;
+    const historyDates = this.props.data;
 
     let chartData = [];
 
-    const cases = historyDates[0].deaths;
-    for (let key in cases) {
+    const deaths = historyDates[0].deaths;
+    for (let key in deaths) {
       chartData.push({
         date: key,
-        case: cases[key],
+        death: deaths[key],
       });
     }
 
-    var dataCase = [];
-    for (let key in cases) {
-      dataCase.push(cases[key]);
+    var dataDeath = [];
+    for (let key in deaths) {
+      dataDeath.push(deaths[key]);
     }
 
     var date = [];
-    for (let key in cases) {
+    for (let key in deaths) {
       date.push(key);
     }
 
     var newData = [];
     var numbers2 = [];
     var preValue;
-    dataCase.map(myFunction);
+    dataDeath.map(myFunction);
 
     function myFunction(value0) {
       if (preValue) {
@@ -38,27 +38,26 @@ class deathBar extends React.Component {
       preValue = value0;
     }
 
-    dataCase.shift();
+    dataDeath.shift();
 
-    for (let key in dataCase) {
+    for (let key in dataDeath) {
       newData.push({
         date: date[key],
         dailyDIFF: numbers2[key],
       });
     }
- 
 
     return (
       <>
-        <div className="row">
+        <div className="row " >
           <div className="col-md-8 col-12">
-            Show
-            <div className="chartBar">
+     
+            <div className="chartBar ">
               <ResponsiveBar
                 data={newData}
                 keys={["dailyDIFF"]}
                 indexBy="date"
-                margin={{ top: 0, right: 0, bottom: 48, left: 41 }}
+                margin={{ top: 15, right: 0, bottom: 48, left: 41 }}
                 padding={0.3}
                 colors={{ scheme: "category10" }}
                 borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
@@ -89,8 +88,9 @@ class deathBar extends React.Component {
             </div>
           </div>
           <div className="col-md-4 col-12">
-            Top 5
-            <List data={this.props.data} />
+          <div className='text-center'>   Top 5
+           </div>
+            <List deaths={this.props.deaths} />
           </div>
         </div>
       </>
@@ -98,3 +98,65 @@ class deathBar extends React.Component {
   }
 }
 export default deathBar;
+
+class List extends React.Component {
+  state = {
+    currentCountries: [],
+    currentPage: null,
+  };
+
+  onPageChanged = (data) => {
+    const deathData = this.props.deaths.slice(1);
+    const { currentPage, pageLimit } = data;
+    const offset = (currentPage - 1) * pageLimit;
+    const currentCountries = deathData.slice(offset, offset + pageLimit);
+
+    this.setState({ currentPage, currentCountries });
+  };
+  render() {
+    const { currentCountries } = this.state;
+
+    const deathData = this.props.deaths;
+
+    const totalCountries = deathData.length;
+
+    deathData.sort(function (a, b) {
+      return b.deaths - a.deaths;
+    });
+
+    if (totalCountries === 0) return null;
+
+    return (
+      <>
+        <div className=" ">
+          {currentCountries.map((country) => (
+            <CountryCard
+              key={country.country}
+              country={country.country}
+              deaths={country.deaths}
+            />
+          ))}
+          <div className="mx-auto d-block ">
+            <Pagination
+              totalRecords={totalCountries}
+              pageLimit={6}
+              pageNeighbours={1}
+              onPageChanged={this.onPageChanged}
+            />
+          </div>
+        </div>
+      </>
+    );
+  }
+}
+
+const CountryCard = (props) => {
+  return (
+    <>
+      <div className="mapData">
+        {props.country}
+        <span className=" lvalue">{props.deaths}</span>
+      </div>
+    </>
+  );
+};

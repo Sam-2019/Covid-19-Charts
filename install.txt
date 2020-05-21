@@ -18,3 +18,5 @@ a pair of gloves = 40
 control +K & control + C
 
 uncomment is control K & control U
+
+Fira Code Retina , 

@@ -32,9 +32,10 @@ class barView extends React.Component {
   render() {
     const view = this.state.mode === "case";
     const view2 = this.state.mode === "death";
+
     return (
       <>
-        <div className="card bottom">
+        <div className="card bottom ">
           <div className="card-header">
             <div className="float-left">
               <button onClick={this.handleCase}>Case</button>
@@ -47,13 +48,13 @@ class barView extends React.Component {
               </button>
             </div>
           </div>
-          <div className="card-body">
+          <div className="card-body ">
             {view ? (
-              <Case data={historyDates} countries={countries} />
+              <Case data={historyDates} cases={countries} />
             ) : view2 ? (
-              <Death data={historyDates} countries={countries} />
+              <Death data={historyDates} deaths={countries} />
             ) : (
-              <Recovery data={historyDates} countries={countries} />
+              <Recovery data={historyDates} recovered={countries} />
             )}
           </div>
         </div>

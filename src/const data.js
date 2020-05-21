@@ -77,3 +77,51 @@ const ArrayToObject = (array, key) =>
  ((obj[[item[key]]] = item), obj), {})
 
  const output = ArrayToObject(countries, "country");
+
+ const { currentCountries } = this.state;
+const cases  = this.props.cases;
+const deaths  = this.props.deaths;
+const recovered  = this.props.recovered;
+
+cases.sort(function (a, b) {
+  return b.cases - a.cases;
+});
+
+deaths.sort(function (a, b) {
+  return b.deaths - a.deaths;
+});
+
+recovered.sort(function (a, b) {
+  return b.recovered - a.recovered;
+});
+
+var dame = 12
+if (dame > 0){
+  return dame
+
+} else {
+  return dame * -1
+
+}
+
+var dame = 12
+if (dame > 0){
+  return dame
+} else {
+  return dame * -1
+}
+
+const x = (x, y) => x * y;
+
+var x = function(x, y) {
+  return x * y;
+}
+
+
+function myFunction() {
+  if (n > 0){
+    return n
+  } else {
+    return n * -1
+  }
+}

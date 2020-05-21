@@ -1,4 +1,6 @@
 import React from "react";
+import HistoryRecovery from "../Line/HistoryRecovery2";
+import historyDates from "../data/historyDates";
 
 export default class Recovered extends React.Component {
   state = {
@@ -31,18 +33,10 @@ export default class Recovered extends React.Component {
               {Intl.NumberFormat().format(recovery)}
               <span className="cardtitle2 float-right">{recoveryRate}%</span>
             </div>
-     
-            <hr />
 
-            <span className="cardtitle3">
-              Today: {this.props.data[0].todayCases}{" "}
-              <span className="output">
-                <span className="pChange">5%</span>
-                <span>
-                  <i className="fas fa-caret-down"></i>
-                </span>
-              </span>
-            </span>
+            <div className=" mb-3">
+              <HistoryRecovery data={historyDates} />
+            </div>
           </div>
         </div>
       </>

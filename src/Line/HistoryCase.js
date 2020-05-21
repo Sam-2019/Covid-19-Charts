@@ -34,6 +34,7 @@ export default class HistoryCase extends React.Component {
     var preValue2;
 
     dataCase.map(percent);
+
     function percent(value) {
       if (preValue) {
         numbers2.push((value - preValue) / preValue);
@@ -70,8 +71,42 @@ export default class HistoryCase extends React.Component {
       data: newData,
     });
 
+    const rate = (newData[28].z * 100).toFixed(2);
+
+    let rateRewrite;
+    if (rate > 0) {
+      rateRewrite = rate;
+    } else rateRewrite = rate * -1;
+
     return (
       <>
+        <div>
+
+          <span className="value">
+          {Intl.NumberFormat().format( this.props.todayCase[0].todayCases)}
+
+          </span>
+          <div className="float-right output slideIn">
+            <span className="pChange">
+              {rate > 0 ? (
+                <span className="green">
+                  <span>
+                    <i className="fas fa-caret-up"></i>
+                  </span>{" "}
+                  {rateRewrite}%
+                </span>
+              ) : (
+                <span className="red">
+                  <span>
+                    <i className="fas fa-caret-down"></i>
+                  </span>{" "}
+                  {rateRewrite}%
+                </span>
+              )}
+            </span>
+          </div>
+        </div>
+
         <div className="chartLine">
           <ResponsiveLine
             data={final}

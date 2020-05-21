@@ -1,6 +1,6 @@
 import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
-import List from "./List";
+import Pagination from "./Pagination";
 
 class recoveryBar extends React.Component {
   render() {
@@ -8,28 +8,28 @@ class recoveryBar extends React.Component {
 
     let chartData = [];
 
-    const cases = historyDates[0].recovered;
-    for (let key in cases) {
+    const recovered = historyDates[0].recovered;
+    for (let key in recovered) {
       chartData.push({
         date: key,
-        case: cases[key],
+        recovery: recovered[key],
       });
     }
 
-    var dataCase = [];
-    for (let key in cases) {
-      dataCase.push(cases[key]);
+    var dataRecovery = [];
+    for (let key in recovered) {
+      dataRecovery.push(recovered[key]);
     }
 
     var date = [];
-    for (let key in cases) {
+    for (let key in recovered) {
       date.push(key);
     }
 
     var newData = [];
     var numbers2 = [];
     var preValue;
-    dataCase.map(myFunction);
+    dataRecovery.map(myFunction);
 
     function myFunction(value0) {
       if (preValue) {
@@ -38,9 +38,9 @@ class recoveryBar extends React.Component {
       preValue = value0;
     }
 
-    dataCase.shift();
+    dataRecovery.shift();
 
-    for (let key in dataCase) {
+    for (let key in dataRecovery) {
       newData.push({
         date: date[key],
         dailyDIFF: numbers2[key],
@@ -51,7 +51,7 @@ class recoveryBar extends React.Component {
       <>
         <div className="row">
           <div className="col-md-8 col-12">
-            Show
+     
             <div className="chartBar">
               <ResponsiveBar
                 data={newData}
@@ -88,8 +88,9 @@ class recoveryBar extends React.Component {
             </div>
           </div>
           <div className="col-md-4 col-12">
-            Top 5
-            <List data={this.props.data} />
+          <div className='text-center'>   Top 5
+           </div>
+            <List recovered={this.props.recovered} />
           </div>
         </div>
       </>
@@ -97,3 +98,65 @@ class recoveryBar extends React.Component {
   }
 }
 export default recoveryBar;
+
+class List extends React.Component {
+  state = {
+    currentCountries: [],
+    currentPage: null,
+  };
+
+  onPageChanged = (data) => {
+    const recoveryData = this.props.recovered.slice(1);
+    const { currentPage, pageLimit } = data;
+    const offset = (currentPage - 1) * pageLimit;
+    const currentCountries = recoveryData.slice(offset, offset + pageLimit);
+
+    this.setState({ currentPage, currentCountries });
+  };
+  render() {
+    const { currentCountries } = this.state;
+
+    const recoveryData = this.props.recovered;
+
+    const totalCountries = recoveryData.length;
+
+    recoveryData.sort(function (a, b) {
+      return b.recovered - a.recovered;
+    });
+
+    if (totalCountries === 0) return null;
+
+    return (
+      <>
+        <div className=" ">
+          {currentCountries.map((country) => (
+            <CountryCard
+              key={country.country}
+              country={country.country}
+              recovered={country.recovered}
+            />
+          ))}
+          <div className="mx-auto d-block ">
+            <Pagination
+              totalRecords={totalCountries}
+              pageLimit={6}
+              pageNeighbours={1}
+              onPageChanged={this.onPageChanged}
+            />
+          </div>
+        </div>
+      </>
+    );
+  }
+}
+
+const CountryCard = (props) => {
+  return (
+    <>
+      <div className="mapData">
+        {props.country}
+        <span className=" lvalue">{props.recovered}</span>
+      </div>
+    </>
+  );
+};

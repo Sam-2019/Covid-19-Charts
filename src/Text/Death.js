@@ -1,4 +1,6 @@
 import React from "react";
+import historyDates from "../data/historyDates";
+import HistoryDeath from "../Line/HistoryDeath2";
 
 export default class Death extends React.Component {
   state = {
@@ -28,21 +30,13 @@ export default class Death extends React.Component {
           </div>
           <div className="cardbody">
             <div className="cardtitle">
-               {Intl.NumberFormat().format(death)}
+              {Intl.NumberFormat().format(death)}
               <span className="cardtitle2 float-right">{deathRate}%</span>
             </div>
-        
-            <hr />
-            <span className="cardtitle3">
-              Today: {this.props.data[0].todayDeaths}{" "}
-              <span className="output">
-                <span className="pChange">5%</span>
-                <span>
-                  <i className="fas fa-caret-down"></i>
-                </span>
-              </span>
-            </span>
 
+            <div className=" mb-3">
+              <HistoryDeath data={historyDates} />
+            </div>
           </div>
         </div>
       </>

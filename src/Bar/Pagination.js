@@ -149,7 +149,7 @@ class Pagination extends Component {
     return (
       <Fragment>
         <nav aria-label="Countries Pagination">
-          <div className="wrapper">
+          <div className="">
             <ul className="pagination justify-content-center">
               {pages.map((page, index) => {
                 if (page === LEFT_PAGE)

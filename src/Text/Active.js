@@ -28,20 +28,13 @@ export default class Active extends React.Component {
             </div>
           </div>
           <div className="cardbody">
-            <div className="cardtitle ">  {Intl.NumberFormat().format(active)}
-            <span className="cardtitle2 float-right">{activeRate}%</span></div>
-        
-            <hr />
+            <div className="cardtitle ">
+              {" "}
+              {Intl.NumberFormat().format(active)}
+              <span className="cardtitle2 float-right">{activeRate}%</span>
+            </div>
 
-            <span className="cardtitle3">
-              Today: {this.props.data[0].todayCases}{" "}
-              <span className="output">
-                <span className="pChange">5%</span>
-                <span>
-                  <i className="fas fa-caret-down"></i>
-                </span>
-              </span>
-            </span>
+    
           </div>
         </div>
       </>

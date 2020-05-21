@@ -1,4 +1,6 @@
 import React from "react";
+import historyDates from "../data/historyDates";
+import HistoryCase from "../Line/HistoryCase2";
 
 export default class Case extends React.Component {
   render() {
@@ -15,23 +17,17 @@ export default class Case extends React.Component {
           </div>
           <div className="cardbody">
             <span></span>
-            <div className="cardtitle"> {Intl.NumberFormat().format(this.props.data[0].cases)}</div>
-           
+            <div className="cardtitle">
+              {Intl.NumberFormat().format(this.props.data[0].cases)}
+            </div>
 
-            <hr />
-            <span className="cardtitle2">
-              Today: {this.props.data[0].todayCases}{" "}
-              <span className="output">
-                <span className="pChange">5%</span>
-                <span>
-                  <i className="fas fa-caret-down"></i>
-                </span>
-              </span>
-            </span>
+            <div className=" mb-3">
+              <HistoryCase data={historyDates} />
+            </div>
+     
           </div>
+  
         </div>
-
-        
       </>
     );
   }

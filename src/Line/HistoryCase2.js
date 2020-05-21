@@ -1,28 +1,29 @@
 import React from "react";
 import { ResponsiveLine } from "@nivo/line";
 
-export default class HistoryRecovery extends React.Component {
+export default class HistoryCase extends React.Component {
   render() {
     const historyDates = this.props.data;
 
     let chartData = [];
     let final = [];
 
-    const recovered = historyDates[0].recovered;
-    for (let key in recovered) {
+    const cases = historyDates[0].cases;
+
+    for (let key in cases) {
       chartData.push({
         date: key,
-        case: recovered[key],
+        case: cases[key],
       });
     }
 
-    var dataRecovery = [];
-    for (let key in recovered) {
-      dataRecovery.push(recovered[key]);
+    var dataCase = [];
+    for (let key in cases) {
+      dataCase.push(cases[key]);
     }
 
     var date = [];
-    for (let key in recovered) {
+    for (let key in cases) {
       date.push(key);
     }
 
@@ -32,38 +33,38 @@ export default class HistoryRecovery extends React.Component {
 
     var preValue;
     var preValue2;
-    
-    dataRecovery.map(myFunction);
 
-    function myFunction(value0) {
+    dataCase.map(percent);
+
+    function percent(value) {
       if (preValue) {
-        numbers2.push((value0 - preValue) / preValue);
+        numbers2.push(value - preValue);
       }
-      preValue = value0;
+      preValue = value;
     }
 
-    dataRecovery.shift();
+    dataCase.shift();
 
-    var datadataRecovery = [];
+    var newdataCase = [];
     for (let key in numbers2) {
-      datadataRecovery.push(numbers2[key]);
+      newdataCase.push(numbers2[key]);
     }
 
-    datadataRecovery.map(percent2);
+    newdataCase.map(percent2);
 
     function percent2(value) {
       if (preValue) {
-        numbers3.push(value - preValue2);
+        numbers3.push(value / preValue2 - 1);
       }
       preValue2 = value;
     }
 
-    for (let key in dataRecovery) {
+    for (let key in dataCase) {
       newData.push({
         x: date[key],
         y: numbers2[key],
         z: numbers3[key],
-        recovered: dataRecovery[key],
+        cases: dataCase[key],
       });
     }
 
@@ -72,6 +73,7 @@ export default class HistoryRecovery extends React.Component {
     });
 
     const rate = (newData[28].z * 100).toFixed(2);
+
     let rateRewrite;
     if (rate > 0) {
       rateRewrite = rate;
@@ -79,8 +81,7 @@ export default class HistoryRecovery extends React.Component {
 
     return (
       <>
-          <div>
-          <span className="value">30,000</span>
+        <div>
           <div className="float-right output slideIn">
             <span className="pChange">
               {rate > 0 ? (

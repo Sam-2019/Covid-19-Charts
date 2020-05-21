@@ -37,7 +37,7 @@ export default class HistoryRecovery extends React.Component {
 
     function myFunction(value0) {
       if (preValue) {
-        numbers2.push((value0 - preValue) / preValue);
+        numbers2.push(value0 - preValue);
       }
       preValue = value0;
     }
@@ -53,7 +53,7 @@ export default class HistoryRecovery extends React.Component {
 
     function percent2(value) {
       if (preValue) {
-        numbers3.push(value - preValue2);
+        numbers3.push(value / preValue2 - 1);
       }
       preValue2 = value;
     }
@@ -80,7 +80,6 @@ export default class HistoryRecovery extends React.Component {
     return (
       <>
           <div>
-          <span className="value">30,000</span>
           <div className="float-right output slideIn">
             <span className="pChange">
               {rate > 0 ? (

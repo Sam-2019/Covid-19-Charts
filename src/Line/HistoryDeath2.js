@@ -1,28 +1,29 @@
 import React from "react";
 import { ResponsiveLine } from "@nivo/line";
 
-export default class HistoryRecovery extends React.Component {
+export default class  HistoryDeath extends React.Component {
+
   render() {
-    const historyDates = this.props.data;
+    const historyDates  = this.props.data;
 
     let chartData = [];
     let final = [];
 
-    const recovered = historyDates[0].recovered;
-    for (let key in recovered) {
+    const deaths = historyDates[0].deaths;
+    for (let key in deaths) {
       chartData.push({
         date: key,
-        case: recovered[key],
+        case: deaths[key],
       });
     }
 
-    var dataRecovery = [];
-    for (let key in recovered) {
-      dataRecovery.push(recovered[key]);
+    var dataDeath = [];
+    for (let key in deaths) {
+      dataDeath.push(deaths[key]);
     }
 
     var date = [];
-    for (let key in recovered) {
+    for (let key in deaths) {
       date.push(key);
     }
 
@@ -32,38 +33,39 @@ export default class HistoryRecovery extends React.Component {
 
     var preValue;
     var preValue2;
-    
-    dataRecovery.map(myFunction);
+
+    dataDeath.map(myFunction);
 
     function myFunction(value0) {
       if (preValue) {
-        numbers2.push((value0 - preValue) / preValue);
+        numbers2.push(value0 - preValue);
       }
       preValue = value0;
     }
 
-    dataRecovery.shift();
+    dataDeath.shift();
 
-    var datadataRecovery = [];
+    var newdataDeath = [];
     for (let key in numbers2) {
-      datadataRecovery.push(numbers2[key]);
+      newdataDeath.push(numbers2[key]);
     }
 
-    datadataRecovery.map(percent2);
+    newdataDeath.map(percent2);
 
     function percent2(value) {
       if (preValue) {
-        numbers3.push(value - preValue2);
+        numbers3.push(value / preValue2 - 1);
       }
       preValue2 = value;
     }
 
-    for (let key in dataRecovery) {
+
+    for (let key in dataDeath) {
       newData.push({
         x: date[key],
         y: numbers2[key],
         z: numbers3[key],
-        recovered: dataRecovery[key],
+        deaths: dataDeath[key],
       });
     }
 
@@ -79,8 +81,7 @@ export default class HistoryRecovery extends React.Component {
 
     return (
       <>
-          <div>
-          <span className="value">30,000</span>
+    <div>
           <div className="float-right output slideIn">
             <span className="pChange">
               {rate > 0 ? (
@@ -139,3 +140,4 @@ export default class HistoryRecovery extends React.Component {
     );
   }
 }
+
