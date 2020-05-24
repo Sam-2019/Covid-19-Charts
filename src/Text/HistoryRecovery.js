@@ -28,50 +28,34 @@ export default class HistoryRecovery extends React.Component {
 
     var newData = [];
     var numbers2 = [];
-    var numbers3 = [];
 
     var preValue;
-    var preValue2;
-    
-    dataRecovery.map(myFunction);
 
-    function myFunction(value0) {
+    dataRecovery.map(percentChange);
+
+    function percentChange(value) {
       if (preValue) {
-        numbers2.push((value0 - preValue) / preValue);
+        numbers2.push((value / preValue - 1) * 100);
       }
-      preValue = value0;
+      preValue = value;
     }
 
     dataRecovery.shift();
-
-    var datadataRecovery = [];
-    for (let key in numbers2) {
-      datadataRecovery.push(numbers2[key]);
-    }
-
-    datadataRecovery.map(percent2);
-
-    function percent2(value) {
-      if (preValue) {
-        numbers3.push(value - preValue2);
-      }
-      preValue2 = value;
-    }
 
     for (let key in dataRecovery) {
       newData.push({
         x: date[key],
         y: numbers2[key],
-        z: numbers3[key],
         recovered: dataRecovery[key],
       });
     }
+
 
     final.push({
       data: newData,
     });
 
-    const rate = (newData[28].z * 100).toFixed(2);
+    const rate = newData[28].y.toFixed(2);
     let rateRewrite;
     if (rate > 0) {
       rateRewrite = rate;
@@ -79,27 +63,22 @@ export default class HistoryRecovery extends React.Component {
 
     return (
       <>
-          <div>
-          <span className="value">30,000</span>
-          <div className="float-right output slideIn">
-            <span className="pChange">
-              {rate > 0 ? (
-                <span className="green">
-                  <span>
-                    <i className="fas fa-caret-up"></i>
-                  </span>{" "}
-                  {rateRewrite}%
-                </span>
-              ) : (
-                <span className="red">
-                  <span>
-                    <i className="fas fa-caret-down"></i>
-                  </span>{" "}
-                  {rateRewrite}%
-                </span>
-              )}
+        <div className="text-right  slideIn">
+          {rate > 0 ? (
+            <span className="green">
+              <span>
+                <i className="fas fa-caret-up"></i>
+              </span>{" "}
+              {rateRewrite}%
             </span>
-          </div>
+          ) : (
+            <span className="red">
+              <span>
+                <i className="fas fa-caret-down"></i>
+              </span>{" "}
+              {rateRewrite}%
+            </span>
+          )}
         </div>
 
         <div className="chartLine">
@@ -130,8 +109,10 @@ export default class HistoryRecovery extends React.Component {
             pointLabel="y"
             pointLabelYOffset={-12}
             enableArea={true}
-            isInteractive={false}
+            isInteractive={true}
             enableCrosshair={false}
+            crosshairType="top-left"
+            useMesh={true}
             legends={[]}
           />
         </div>

@@ -25,18 +25,16 @@ export default class Pie extends React.Component {
     const view = this.state.mode === "case";
     return (
       <>
-        <div className="card bottom">
-          <div className="card-header">
+        <div className=" bottom shadow">
+          <div className="cardheader">
             Continents
             <div className="float-right">
-              <button onClick={this.handleCase}>Case</button>
-              <button onClick={this.handleDeath}>Death</button>
-              <button>
-                <i className="fas fa-ellipsis-v"></i>
-              </button>
+              <button  className='bottomText' onClick={this.handleCase}>Case</button>
+              <button className='bottomText' onClick={this.handleDeath}>Death</button>
+    
             </div>
           </div>
-          <div className="cardbody">
+          <div className="cardbody m-4">
             {view ? <Case data={continent} /> : <Death data={continent} />}
           </div>
         </div>

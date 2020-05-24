@@ -1,7 +1,0 @@
-window.helpers = (function () {
-
-
-  return {
-
-  };
-})();

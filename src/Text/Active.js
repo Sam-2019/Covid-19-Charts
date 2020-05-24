@@ -21,20 +21,16 @@ export default class Active extends React.Component {
         <div className=" bottom shadow ">
           <div className="cardheader">
             Active
-            <div className="float-right">
-              <span>
-                <i className="fas fa-info-circle"></i>
-              </span>
-            </div>
+            <span className="float-right">
+              <i className="fas fa-info-circle"></i>
+            </span>
           </div>
           <div className="cardbody">
-            <div className="cardtitle ">
-              {" "}
-              {Intl.NumberFormat().format(active)}
-              <span className="cardtitle2 float-right">{activeRate}%</span>
-            </div>
 
-    
+
+            <div className="cardtitle  border">
+              {Intl.NumberFormat().format(active)}
+            </div>
           </div>
         </div>
       </>

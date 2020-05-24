@@ -7,8 +7,8 @@ ul.pagination {
   align-items: center;
 }
 ul.pagination li.page-item.active button.page-link {
-  color: #445565 !important;
-  background-color: #e3e7eb !important;
+  color: #62788b !important;
+  background-color: #ffffff !important;
   border-color: #ced4da !important;
 }
 ul.pagination button.page-link {
@@ -16,9 +16,10 @@ ul.pagination button.page-link {
   min-width:auto;
   text-align: center;
   box-shadow: none !important;
-  border-color: #ced4da !important;
-  color: #6b88a4;
+  border-color: #b8c0c8 !important;
+  color: #626262;
   font-weight: 600;
+  background-color: #e3e7eb;
   font-size: 0.5rem;
 }
 ul.pagination button.page-link:hover {

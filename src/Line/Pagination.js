@@ -148,7 +148,7 @@ class Pagination extends Component {
 
     return (
       <Fragment>
-        <nav aria-label="Countries Pagination">
+        <nav aria-label="Countries Pagination ">
           <div className="">
             <ul className="pagination justify-content-center">
               {pages.map((page, index) => {
@@ -190,7 +190,7 @@ class Pagination extends Component {
                     }`}
                   >
                     <button
-                      className="page-link"
+                      className="page-link "
                       href="#"
                       onClick={this.handleClick(page)}
                     >

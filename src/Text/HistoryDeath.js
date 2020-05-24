@@ -1,10 +1,9 @@
 import React from "react";
 import { ResponsiveLine } from "@nivo/line";
 
-export default class  HistoryDeath extends React.Component {
-
+export default class HistoryDeath extends React.Component {
   render() {
-    const historyDates  = this.props.data;
+    const historyDates = this.props.data;
 
     let chartData = [];
     let final = [];
@@ -29,42 +28,24 @@ export default class  HistoryDeath extends React.Component {
 
     var newData = [];
     var numbers2 = [];
-    var numbers3 = [];
 
     var preValue;
-    var preValue2;
 
-    dataDeath.map(myFunction);
+    dataDeath.map(percentChange);
 
-    function myFunction(value0) {
+    function percentChange(value) {
       if (preValue) {
-        numbers2.push(value0 - preValue);
+        numbers2.push((value / preValue - 1) * 100);
       }
-      preValue = value0;
+      preValue = value;
     }
 
     dataDeath.shift();
-
-    var newdataDeath = [];
-    for (let key in numbers2) {
-      newdataDeath.push(numbers2[key]);
-    }
-
-    newdataDeath.map(percent2);
-
-    function percent2(value) {
-      if (preValue) {
-        numbers3.push(value / preValue2 - 1);
-      }
-      preValue2 = value;
-    }
-
 
     for (let key in dataDeath) {
       newData.push({
         x: date[key],
         y: numbers2[key],
-        z: numbers3[key],
         deaths: dataDeath[key],
       });
     }
@@ -73,7 +54,8 @@ export default class  HistoryDeath extends React.Component {
       data: newData,
     });
 
-    const rate = (newData[28].z * 100).toFixed(2);
+    const rate = newData[28].y.toFixed(2);
+
     let rateRewrite;
     if (rate > 0) {
       rateRewrite = rate;
@@ -81,32 +63,30 @@ export default class  HistoryDeath extends React.Component {
 
     return (
       <>
-    <div>
-          <div className="float-right output slideIn">
-            <span className="pChange">
-              {rate > 0 ? (
-                <span className="green">
-                  <span>
-                    <i className="fas fa-caret-up"></i>
-                  </span>{" "}
-                  {rateRewrite}%
-                </span>
-              ) : (
-                <span className="red">
-                  <span>
-                    <i className="fas fa-caret-down"></i>
-                  </span>{" "}
-                  {rateRewrite}%
-                </span>
-              )}
-            </span>
-          </div>
+         <div className="text-right  slideIn">
+
+            {rate > 0 ? (
+              <span className="green">
+                <span>
+                  <i className="fas fa-caret-up"></i>
+                </span>{" "}
+                {rateRewrite}%
+              </span>
+            ) : (
+              <span className="red">
+                <span>
+                  <i className="fas fa-caret-down"></i>
+                </span>{" "}
+                {rateRewrite}%
+              </span>
+            )}
+    
         </div>
 
         <div className="chartLine">
           <ResponsiveLine
             data={final}
-            margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
+            margin={{ top: 0, right: 0, bottom: 8, left: 0 }}
             xScale={{ type: "point" }}
             yScale={{
               type: "linear",
@@ -131,8 +111,10 @@ export default class  HistoryDeath extends React.Component {
             pointLabel="y"
             pointLabelYOffset={-12}
             enableArea={true}
-            isInteractive={false}
+            isInteractive={true}
             enableCrosshair={false}
+            crosshairType="top-left"
+            useMesh={true}
             legends={[]}
           />
         </div>
@@ -140,4 +122,3 @@ export default class  HistoryDeath extends React.Component {
     );
   }
 }
-

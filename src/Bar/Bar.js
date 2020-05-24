@@ -1,9 +1,9 @@
 import React from "react";
 import Case from "./Case";
 import Death from "./Death";
-import Recovery from "./Recovery";
+import Recovered from "./Recovery";
 import historyDates from "../data/historyDates";
-import countries from "../data/Countries";
+import All from "../data/All";
 
 class barView extends React.Component {
   constructor(props) {
@@ -30,31 +30,35 @@ class barView extends React.Component {
   }
 
   render() {
+    const date = new Date();
+    const k = date.toDateString();
     const view = this.state.mode === "case";
     const view2 = this.state.mode === "death";
 
     return (
       <>
-        <div className="card bottom ">
-          <div className="card-header">
-            <div className="float-left">
-              <button onClick={this.handleCase}>Case</button>
-              <button onClick={this.handleDeath}>Death</button>
-              <button onClick={this.handleRecovery}>Recovery</button>
-            </div>
-            <div className="float-right">
-              <button>
-                <i className="fas fa-ellipsis-h"></i>
+        <div className="bottom shadow ">
+          <div className="cardheader">
+            <span className="float-left text-primary">
+              <button className="bottomText" onClick={this.handleCase}>
+                Case
               </button>
-            </div>
+              <button className="bottomText" onClick={this.handleDeath}>
+                Death
+              </button>
+              <button className="bottomText" onClick={this.handleRecovery}>
+                Recovery
+              </button>
+            </span>
+            <span className="float-right">{k}</span>
           </div>
-          <div className="card-body ">
+          <div className="cardbody p-3">
             {view ? (
-              <Case data={historyDates} cases={countries} />
+              <Case data={historyDates} today={All} />
             ) : view2 ? (
-              <Death data={historyDates} deaths={countries} />
+              <Death data={historyDates} today={All} />
             ) : (
-              <Recovery data={historyDates} recovered={countries} />
+              <Recovered data={historyDates}/>
             )}
           </div>
         </div>
