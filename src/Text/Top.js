@@ -3,51 +3,42 @@ import Case from "./Case";
 import Death from "./Death";
 import Recovered from "./Recovered";
 import Spinner from "../Spinner";
-import All from "../data/All";
 
 export default class Top extends React.Component {
-  state = {
-    all: All || {},
-  };
-
-  componentDidMount() {
-    this.getData();
-  }
-  componentWillUnmount() {
-    clearTimeout(this.intervalID);
-  }
-
-  getData = () => {
-    fetch("https://corona.lmao.ninja/v2/all")
-      .then((response) => response.json())
-      .then((all) => {
-        this.setState({ all });
-        this.intervalID = setTimeout(this.getData.bind(this), 5000);
-      });
-  };
   render() {
-    const { all } = this.state;
-
     let content;
-    let lengthCases = Object.keys(all).length;
+    let HistoryDateAll = Object.keys(this.props.historyDate).length;
 
-    if (lengthCases === 0) {
-      content = <Spinner />;
-    } else if (lengthCases > 0) {
+    if (HistoryDateAll === 0) {
+      content = (
+        <>
+          <Spinner />
+        </>
+      );
+    } else if (HistoryDateAll > 0) {
       content = (
         <>
           <div className="d-none d-sm-block">
             <div className="row mt-3">
               <div className=" col-4">
-                <Case data={all} />
+                <Case
+                  allCases={this.props.all.cases}
+                  historyCases={this.props.historyDate.cases}
+                />
               </div>
 
               <div className=" col-4">
-                <Death data={all} />
+                <Death
+                  allDeaths={this.props.all.deaths}
+                  historyDeaths={this.props.historyDate.deaths}
+                />
               </div>
 
               <div className=" col-4">
-                <Recovered data={all} />
+                <Recovered
+                  allRecovered={this.props.all.recovered}
+                  historyRecovered={this.props.historyDate.recovered}
+                />
               </div>
             </div>
           </div>
@@ -55,15 +46,24 @@ export default class Top extends React.Component {
           <div className="d-none d-block d-sm-none ">
             <div className="row">
               <div className=" col-12 mt-3">
-                <Case data={all} />
+                <Case
+                  allCases={this.props.all.cases}
+                  historyCases={this.props.historyDate.cases}
+                />
               </div>
 
               <div className=" col-12 mt-3">
-                <Death data={all} />
+                <Death
+                  allDeaths={this.props.all.deaths}
+                  historyDeaths={this.props.historyDate.deaths}
+                />
               </div>
 
               <div className=" col-12 mt-3">
-                <Recovered data={all} />
+                <Recovered
+                  allRecovered={this.props.all.recovered}
+                  historyRecovered={this.props.historyDate.recovered}
+                />
               </div>
             </div>
           </div>

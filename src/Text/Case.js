@@ -1,21 +1,20 @@
 import React from "react";
-import historyDates from "../data/historyDates";
 import HistoryCase from "./HistoryCase";
 
 export default class Case extends React.Component {
   render() {
+    const caseOutput = this.props.allCases;
+
     return (
       <>
+        <div className="cardheader">Cases</div>
         <div className=" bottom shadow ">
-          <div className="cardheader">Cases</div>
-          <div className="cardbody">
+          <div className="cardbody mb-3">
             <div className="title text-center case">
-              {Intl.NumberFormat().format(this.props.data[0].cases)}
+              {Intl.NumberFormat().format(caseOutput)}
             </div>
 
-            <div className=" mb-3">
-              <HistoryCase data={historyDates} />
-            </div>
+            <HistoryCase historyCases={this.props.historyCases}/>
           </div>
         </div>
       </>

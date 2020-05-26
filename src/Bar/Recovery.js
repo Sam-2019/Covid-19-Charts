@@ -3,11 +3,10 @@ import { ResponsiveBar } from "@nivo/bar";
 
 class recoveryBar extends React.Component {
   render() {
-    const historyDates = this.props.data;
+    const recovered = this.props.historyRecovered;
 
     let chartData = [];
 
-    const recovered = historyDates[0].recovered;
     for (let key in recovered) {
       chartData.push({
         date: key,
@@ -37,7 +36,8 @@ class recoveryBar extends React.Component {
       preValue = value0;
     }
 
-    dataRecovery.shift();
+    console.log(date.shift());
+    console.log(dataRecovery.shift());
 
     for (let key in dataRecovery) {
       newData.push({
@@ -91,7 +91,7 @@ class recoveryBar extends React.Component {
               />
             </div>
           </div>
-          <div className="col-md-3 col-12 text-center ">
+          <div className="col-md-3 col-12 text-center  mt-1">
             <div className="top-head p-1 ">Yesterday's Recovery</div>
 
             <div className="kane   shadow  rounded">

@@ -3,11 +3,10 @@ import { ResponsiveBar } from "@nivo/bar";
 
 class caseBar extends React.Component {
   render() {
-    const historyDates = this.props.data;
 
+
+    const cases = this.props.historyCases;
     let chartData = [];
-
-    const cases = historyDates[0].cases;
     for (let key in cases) {
       chartData.push({
         date: key,
@@ -37,7 +36,8 @@ class caseBar extends React.Component {
       preValue = value0;
     }
 
-    dataCase.shift();
+    console.log(date.shift());
+    console.log(dataCase.shift());
 
     for (let key in dataCase) {
       newData.push({
@@ -46,7 +46,9 @@ class caseBar extends React.Component {
       });
     }
 
-    const todayCase = this.props.today[0].todayCases;
+    console.log(newData);
+
+    const todayCase = this.props.allCases
     const yesterdayCase = numbers2[28];
     function compare(a, b) {
       return ((b / a - 1) * 100).toFixed(2);
@@ -60,7 +62,6 @@ class caseBar extends React.Component {
 
     return (
       <>
-
         <div className="row  ">
           <div className="col-md-9 col-12 ">
             <div className="chartBar ">
@@ -95,14 +96,12 @@ class caseBar extends React.Component {
               />
             </div>
           </div>
-          <div className="col-md-3 col-12 text-center ">
-          <div className="top-head p-1 ">Today's Cases</div>
+          <div className="col-md-3 col-12 text-center  mt-1">
+            <div className="top-head p-1 ">Today's Cases</div>
 
             <div className="kane   shadow  rounded">
-     
               <div className="value case">
                 {Intl.NumberFormat().format(todayCase)}
-         
               </div>
               <div className="mb-3 ">
                 <span className=" output slideIn">

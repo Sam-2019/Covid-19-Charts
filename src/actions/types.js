@@ -1,6 +1,0 @@
-export const GET_ALL = 'GET_ALL';
-export const GET_CONTINENTS = 'GET_CONTINENTS';
-export const GET_HISTORICAL = 'GET_HISTORICAL';
-export const GET_HISTORYDATES = 'GET_HISTORYDATES';
-export const GET_COUNTRIES = 'GET_COUNTRIES';
-export const DATA_LOADING = 'ITEMS_LOADING';

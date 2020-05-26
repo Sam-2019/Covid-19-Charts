@@ -3,11 +3,11 @@ import { ResponsiveBar } from "@nivo/bar";
 
 class deathBar extends React.Component {
   render() {
-    const historyDates = this.props.data;
+    const deaths = this.props.historyDeaths
 
     let chartData = [];
 
-    const deaths = historyDates[0].deaths;
+
     for (let key in deaths) {
       chartData.push({
         date: key,
@@ -37,7 +37,8 @@ class deathBar extends React.Component {
       preValue = value0;
     }
 
-    dataDeath.shift();
+    console.log(date.shift())
+    console.log(dataDeath.shift())
 
     for (let key in dataDeath) {
       newData.push({
@@ -46,7 +47,7 @@ class deathBar extends React.Component {
       });
     }
 
-    const todayDeath = this.props.today[0].todayDeaths;
+    const todayDeath = this.props.allDeaths
     const yesterdayDeath = numbers2[28];
     function compare(a, b) {
       return ((b / a - 1) * 100).toFixed(2);
@@ -91,7 +92,7 @@ class deathBar extends React.Component {
               />
             </div>
           </div>
-          <div className="col-md-3 col-12  text-center ">
+          <div className="col-md-3 col-12  text-center  mt-1 ">
           <div className="top-head p-1 death ">Today's Deaths</div>
           <div className="kane shadow  rounded">
               <div className="value death">
@@ -124,32 +125,3 @@ class deathBar extends React.Component {
   }
 }
 export default deathBar;
-
-class List extends React.Component {
-  render() {
-    const deathData = this.props.deaths;
-    deathData.sort(function (a, b) {
-      return b.deaths - a.deaths;
-    });
-
-    const n = 8;
-    const deathArray = deathData.slice(1, n);
-
-    return (
-      <>
-        <div className=" table card">
-          {deathArray.map((country) => (
-            <>
-              <div className="mapData  border" key={country.country}>
-                {country.country}
-                <span className="lvalue">
-                  {Intl.NumberFormat().format(country.deaths)}
-                </span>
-              </div>
-            </>
-          ))}
-        </div>
-      </>
-    );
-  }
-}

@@ -1,6 +1,5 @@
 import React from "react";
 import Pagination from "./Pagination";
-import countries from "../data/Countries";
 
 export default class List extends React.Component {
   state = {
@@ -9,7 +8,7 @@ export default class List extends React.Component {
   };
 
   onPageChanged = (data) => {
-    const allCountries = countries.slice(1);
+    const allCountries = this.props.countries;
     const { currentPage, pageLimit } = data;
     const offset = (currentPage - 1) * pageLimit;
     const currentCountries = allCountries.slice(offset, offset + pageLimit);
@@ -19,19 +18,16 @@ export default class List extends React.Component {
   render() {
     const { currentCountries } = this.state;
 
-    const allCountries = countries;
-  
-    console.log(allCountries)
+    const allCountries = this.props.countries;
+
     const totalCountries = allCountries.length;
     if (totalCountries === 0) return null;
 
-    const sortCountries = countries
+    const sortCountries = this.props.countries;
     sortCountries.sort(function (a, b) {
       return b.cases - a.cases;
     });
-    const n = 500;
-    const caseArray = sortCountries.slice(1, n);
- 
+
     return (
       <>
         <table className="table table-hover text-center category">
@@ -55,15 +51,14 @@ export default class List extends React.Component {
             ))}
           </tbody>
         </table>
-        <div className=" ">
-          <div className="mx-auto d-block ">
-            <Pagination
-              totalRecords={totalCountries}
-              pageLimit={6}
-              pageNeighbours={1}
-              onPageChanged={this.onPageChanged}
-            />
-          </div>
+
+        <div className="mx-auto d-block ">
+          <Pagination
+            totalRecords={totalCountries}
+            pageLimit={6}
+            pageNeighbours={1}
+            onPageChanged={this.onPageChanged}
+          />
         </div>
       </>
     );

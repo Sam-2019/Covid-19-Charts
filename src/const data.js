@@ -125,3 +125,28 @@ function myFunction() {
     return n * -1
   }
 }
+
+
+const rate = newData[28].y.toFixed(2);
+
+let rateRewrite;
+if (rate > 0) {
+  rateRewrite = rate;
+} else rateRewrite = rate * -1;
+
+
+{rate > 0 ? (
+    <span className="green">
+      <span>
+        <i className="fas fa-caret-up"></i>
+      </span>{" "}
+      {rateRewrite}%
+    </span>
+  ) : (
+    <span className="red">
+      <span>
+        <i className="fas fa-caret-down"></i>
+      </span>{" "}
+      {rateRewrite}%
+    </span>
+  )}

@@ -3,12 +3,10 @@ import { ResponsiveLine } from "@nivo/line";
 
 export default class HistoryDeath extends React.Component {
   render() {
-    const historyDates = this.props.data;
+    const deaths = this.props.historyDeaths;
 
-    let chartData = [];
-    let final = [];
+    const chartData = [];
 
-    const deaths = historyDates[0].deaths;
     for (let key in deaths) {
       chartData.push({
         date: key,
@@ -40,7 +38,8 @@ export default class HistoryDeath extends React.Component {
       preValue = value;
     }
 
-    dataDeath.shift();
+    console.log(date.shift())
+    console.log(dataDeath.shift())
 
     for (let key in dataDeath) {
       newData.push({
@@ -49,6 +48,8 @@ export default class HistoryDeath extends React.Component {
         deaths: dataDeath[key],
       });
     }
+
+    const final = [];
 
     final.push({
       data: newData,
@@ -63,24 +64,22 @@ export default class HistoryDeath extends React.Component {
 
     return (
       <>
-         <div className="text-right  slideIn">
-
-            {rate > 0 ? (
-              <span className="green">
-                <span>
-                  <i className="fas fa-caret-up"></i>
-                </span>{" "}
-                {rateRewrite}%
-              </span>
-            ) : (
-              <span className="red">
-                <span>
-                  <i className="fas fa-caret-down"></i>
-                </span>{" "}
-                {rateRewrite}%
-              </span>
-            )}
-    
+        <div className="text-right  slideIn">
+          {rate > 0 ? (
+            <span className="green">
+              <span>
+                <i className="fas fa-caret-up"></i>
+              </span>{" "}
+              {rateRewrite}%
+            </span>
+          ) : (
+            <span className="red">
+              <span>
+                <i className="fas fa-caret-down"></i>
+              </span>{" "}
+              {rateRewrite}%
+            </span>
+          )}
         </div>
 
         <div className="chartLine">

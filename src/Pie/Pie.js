@@ -1,7 +1,8 @@
 import React from "react";
 import Case from "./caseData";
 import Death from "./deathData";
-import continent from "../data/Continent";
+import Spinner from "../Spinner";
+
 
 export default class Pie extends React.Component {
   constructor(props) {
@@ -23,22 +24,42 @@ export default class Pie extends React.Component {
   }
   render() {
     const view = this.state.mode === "case";
-    return (
-      <>
-        <div className=" bottom shadow">
+
+    let content;
+    let continentData = Object.keys(this.props.continents).length;
+    if (continentData === 0) {
+      content = (
+        <>
+          <Spinner />
+        </>
+      );
+    } else if (continentData > 0) {
+      content = (
+        <>
           <div className="cardheader">
             Continents
             <div className="float-right">
-              <button  className='bottomText' onClick={this.handleCase}>Case</button>
-              <button className='bottomText' onClick={this.handleDeath}>Death</button>
-    
+              <button className="bottomText" onClick={this.handleCase}>
+                Case
+              </button>
+              <button className="bottomText" onClick={this.handleDeath}>
+                Death
+              </button>
             </div>
           </div>
-          <div className="cardbody m-4">
-            {view ? <Case data={continent} /> : <Death data={continent} />}
+          <div className="bottom  shadow">
+            <div className="cardbody pb-3">
+              {view ? (
+                <Case continent={this.props.continents} />
+              ) : (
+                <Death continent={this.props.continents} />
+              )}
+            </div>
           </div>
-        </div>
-      </>
-    );
+        </>
+      );
+    }
+
+    return <>{content}</>;
   }
 }

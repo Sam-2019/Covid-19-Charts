@@ -1,0 +1,85 @@
+//All 
+  componentDidMount() {
+    this.getAll();
+  }
+  componentWillUnmount() {
+    clearTimeout(this.intervalID);
+  }
+
+  getAll = () => {
+    fetch("https://corona.lmao.ninja/v2/all")
+      .then((response) => response.json())
+      .then((all) => {
+        this.setState({ all });
+        this.intervalID = setTimeout(this.getAll.bind(this), 5000);
+      });
+  };
+
+  //Countries
+    componentDidMount() {
+    this.getCountries();
+  }
+  componentWillUnmount() {
+    clearTimeout(this.intervalID);
+  }
+
+  getCountries = () => {
+    fetch("https://corona.lmao.ninja/v2/countries")
+      .then((response) => response.json())
+      .then((countries) => {
+        this.setState({ countries });
+        this.intervalID = setTimeout(this.getCountries.bind(this), 5000);
+      });
+  };
+
+    //Continents
+    componentDidMount() {
+    this.getContinents();
+  }
+  componentWillUnmount() {
+    clearTimeout(this.intervalID);
+  }
+
+  getContinents = () => {
+    fetch("https://disease.sh/v2/continents")
+      .then((response) => response.json())
+      .then((continents) => {
+        this.setState({ continents });
+        this.intervalID = setTimeout(this.getContinents.bind(this), 5000);
+      });
+  };
+
+      //historyDates
+    componentDidMount() {
+    this.getHistoryDates();
+  }
+  componentWillUnmount() {
+    clearTimeout(this.intervalID);
+  }
+
+  getHistoryDates = () => {
+    fetch("https://corona.lmao.ninja/v2/historical/all")
+      .then((response) => response.json())
+      .then((historyDates) => {
+        this.setState({ historyDates });
+        this.intervalID = setTimeout(this.getHistoryDates.bind(this), 5000);
+      });
+  };
+
+        //historical
+    componentDidMount() {
+    this.getHistorical();
+  }
+  componentWillUnmount() {
+    clearTimeout(this.intervalID);
+  }
+
+  getHistorical = () => {
+    fetch("https://corona.lmao.ninja/v2/historical")
+      .then((response) => response.json())
+      .then((historical) => {
+        this.setState({ historical });
+        this.intervalID = setTimeout(this.getHistorical.bind(this), 5000);
+      });
+  };
+

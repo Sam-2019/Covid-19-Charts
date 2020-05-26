@@ -305,7 +305,7 @@
 .red {
   color: #da3131;
   transition: 0.3s;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .green {
@@ -320,9 +320,7 @@
 
 .cardbody {
   -ms-flex: 1 1 auto;
-  flex: 1 1 auto;
-  padding: 0rem 1rem 0rem 1rem;
-  background-color: rgb(255, 255, 255) !important;
+  flex: auto;
 }
 
 .cardheader {
@@ -351,8 +349,12 @@
   word-wrap: break-word;
   background-color: rgb(255, 255, 255);
   background-clip: border-box;
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 0 hsla(0, 0%, 100%, 0.15);
+  border-radius: 0 0 0.5em 0.5em;
+  padding: 1rem 1rem 0 1rem;
+}
+
+.date {
+  font-size: 60%;
 }
 
 .top-head {
@@ -363,7 +365,7 @@
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: rgb(147, 193, 248);
+  background-color: rgb(198, 217, 239);
   background-clip: border-box;
   box-shadow: 2px 2px 2px hsla(0, 0%, 71%, 0.761);
   border-top: 1px solid hsla(0, 3%, 87%, 0.142) !important;
@@ -383,5 +385,29 @@
 
 .kane:hover {
   color: #212529;
-  background-color: rgba(0, 0, 0, 0.075);
+  background-color: #00000013;
 }
+
+
+button{
+  width: auto;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 2px 2px 3px #00000080;
+}
+
+button:focus:active {
+  background-color: #adadad;
+  }
+
+  .spinner {
+    background-color: #e5e4e4;
+    transition: 0.3s;
+  }
+
+  .spin {
+    background-color: #e5e4e4;
+    transition: 0.3s;
+margin-top: 18.5em;
+  }
+

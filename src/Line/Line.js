@@ -1,21 +1,31 @@
 import React from "react";
 import List from "./List";
+import Spinner from "../Spinner";
 
 export default class Line extends React.Component {
   render() {
-    return (
-      <>
-        <div className="bottom bg-dark">
+    let content;
+    let countriesData = Object.keys(this.props.countries).length;
+
+    if (countriesData === 0) {
+      content = (
+        <>
+          <Spinner />
+        </>
+      );
+    } else if (countriesData > 0) {
+      content = (
+        <>
           <div className="cardheader">Country's Stats</div>
-          <div className="cardbody">
-            <div className="row ">
-              <div className="col-12">
-                <List />
-              </div>
+          <div className="bottom shadow">
+            <div className="cardbody">
+              <List countries={this.props.countries} />
             </div>
           </div>
-        </div>
-      </>
-    );
+        </>
+      );
+    }
+
+    return <>{content}</>;
   }
 }

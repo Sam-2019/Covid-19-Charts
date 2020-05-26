@@ -3,7 +3,7 @@ import { ResponsivePie } from "@nivo/pie";
 
 class Case extends React.Component {
   render() {
-    const continent = this.props.data;
+    const continent = this.props.continent;
     let casesData = [];
 
     for (let key in continent) {
@@ -19,7 +19,7 @@ class Case extends React.Component {
         <div className="chart">
           <ResponsivePie
             data={casesData}
-            margin={{ top: 0, right: 120, bottom: 0, left: 0 }}
+            margin={{ top: 0, right: 110, bottom: 0, left: 0 }}
             innerRadius={0.7}
             padAngle={2}
             cornerRadius={0}
@@ -56,7 +56,7 @@ class Case extends React.Component {
             ]}
             legends={[
               {
-                translateX: 165,
+                translateX: 160,
                 translateY: 0,
                 anchor: "right",
                 direction: "column",

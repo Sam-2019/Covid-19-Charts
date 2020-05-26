@@ -2,13 +2,10 @@ import React from "react";
 import { ResponsiveLine } from "@nivo/line";
 
 export default class HistoryCase extends React.Component {
+
   render() {
-    const historyDates = this.props.data;
-
-    let chartData = [];
-    let final = [];
-
-    const cases = historyDates[0].cases;
+    const cases = this.props.historyCases;
+    const chartData = [];
 
     for (let key in cases) {
       chartData.push({
@@ -41,7 +38,9 @@ export default class HistoryCase extends React.Component {
       preValue = value;
     }
 
-    dataCase.shift();
+    console.log(date.shift())
+    console.log(dataCase.shift())
+
 
     for (let key in dataCase) {
       newData.push({
@@ -51,10 +50,12 @@ export default class HistoryCase extends React.Component {
       });
     }
 
+    const final = [];
+
     final.push({
       data: newData,
     });
-
+console.log(final)
     const rate = newData[28].y.toFixed(2);
 
     let rateRewrite;

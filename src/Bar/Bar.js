@@ -2,10 +2,9 @@ import React from "react";
 import Case from "./Case";
 import Death from "./Death";
 import Recovered from "./Recovery";
-import historyDates from "../data/historyDates";
-import All from "../data/All";
+import Spinner from "../Spinner";
 
-class barView extends React.Component {
+export default class barView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,36 +34,52 @@ class barView extends React.Component {
     const view = this.state.mode === "case";
     const view2 = this.state.mode === "death";
 
-    return (
-      <>
-        <div className="bottom shadow ">
+    let content;
+    let lengthAll = Object.keys(this.props.all).length;
+
+    if (lengthAll === 0) {
+      content = (
+        <>
+          <Spinner />
+        </>
+      );
+    } else if (lengthAll > 0) {
+      content = (
+        <>
           <div className="cardheader">
-            <span className="float-left text-primary">
-              <button className="bottomText" onClick={this.handleCase}>
-                Case
-              </button>
-              <button className="bottomText" onClick={this.handleDeath}>
-                Death
-              </button>
-              <button className="bottomText" onClick={this.handleRecovery}>
-                Recovery
-              </button>
-            </span>
-            <span className="float-right">{k}</span>
+            <button className="bottomText" onClick={this.handleCase}>
+              Case
+            </button>
+            <button className="bottomText" onClick={this.handleDeath}>
+              Death
+            </button>
+            <button className="bottomText" onClick={this.handleRecovery}>
+              Recovery
+            </button>
           </div>
-          <div className="cardbody p-3">
-            {view ? (
-              <Case data={historyDates} today={All} />
-            ) : view2 ? (
-              <Death data={historyDates} today={All} />
-            ) : (
-              <Recovered data={historyDates}/>
-            )}
+
+          <div className="bottom shadow ">
+            <div className="cardbody mb-3">
+              {view ? (
+                <Case
+                  allCases={this.props.all.todayCases}
+                  historyCases={this.props.historyDate.cases}
+                />
+              ) : view2 ? (
+                <Death
+                  allDeaths={this.props.all.todayDeaths}
+                  historyDeaths={this.props.historyDate.deaths}
+                />
+              ) : (
+                <Recovered
+                  historyRecovered={this.props.historyDate.recovered}
+                />
+              )}
+            </div>
           </div>
-        </div>
-      </>
-    );
+        </>
+      );
+    }
+    return <>{content}</>;
   }
 }
-
-export default barView;
