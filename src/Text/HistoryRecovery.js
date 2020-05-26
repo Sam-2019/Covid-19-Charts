@@ -1,16 +1,11 @@
 import React from "react";
 import { ResponsiveLine } from "@nivo/line";
-import historydate from '../data/historyDates'
 
 export default class HistoryRecovery extends React.Component {
-  state = {
-    historydate:historydate,
-  };
   render() {
-    const recovered = this.props.historyRecovered
+    const recovered = this.props.historyRecovered;
 
     let chartData = [];
-
 
     for (let key in recovered) {
       chartData.push({
@@ -43,8 +38,8 @@ export default class HistoryRecovery extends React.Component {
       preValue = value;
     }
 
-    console.log(date.shift())
-    console.log(dataRecovery.shift())
+    console.log(date.shift());
+    console.log(dataRecovery.shift());
 
     for (let key in dataRecovery) {
       newData.push({
