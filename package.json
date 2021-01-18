@@ -9,7 +9,7 @@
     "@nivo/line": "^0.61.1",
     "@nivo/pie": "^0.61.1",
     "@opd/g2plot-react": "^1.2.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bizcharts": "^4.0.2",
     "bootstrap": "^4.4.1",
     "britecharts-react": "^0.5.3",
