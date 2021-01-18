@@ -29,8 +29,6 @@ export default class barView extends React.Component {
   }
 
   render() {
-    const date = new Date();
-    const k = date.toDateString();
     const view = this.state.mode === "case";
     const view2 = this.state.mode === "death";
 
